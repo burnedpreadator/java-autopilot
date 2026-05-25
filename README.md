@@ -30,9 +30,9 @@ The platform can:
 - OSGi
 
 ## Planned Features
+Succeeded in implementing Phase 1 (MVP). See [User Guide](docs/USER_GUIDE.md) for how to use the current version.
 
-### Phase 1
-
+### Phase 1 (Completed)
 - Source code analyzer
 - SWT widget inspector
 - Runtime screen detector
