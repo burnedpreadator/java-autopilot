@@ -16,6 +16,11 @@
             transform: translateY(-5px);
             transition: all 0.3s ease;
         }
+        .doc-card:hover {
+            border-color: #2563eb;
+            transform: scale(1.02);
+            transition: all 0.2s ease;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -30,6 +35,7 @@
         </div>
         <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
             <a href="#features" class="hover:text-blue-600 transition">Features</a>
+            <a href="#docs" class="hover:text-blue-600 transition">Documentation</a>
             <a href="#architecture" class="hover:text-blue-600 transition">Architecture</a>
             <a href="#roadmap" class="hover:text-blue-600 transition">Roadmap</a>
             <a href="https://github.com/burnedpreadator/java-autopilot" class="bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-slate-800 transition">GitHub Repo</a>
@@ -45,6 +51,9 @@
             </svg>
         </div>
         <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-block bg-blue-500/20 text-blue-300 px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-sm border border-blue-400/30">
+                Phase 1 MVP Complete ✓
+            </div>
             <h1 class="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
                 The Playwright of <span class="text-blue-400">Java Desktop Applications</span>
             </h1>
@@ -55,8 +64,8 @@
                 <a href="https://github.com/burnedpreadator/java-autopilot" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold transition flex items-center gap-2">
                     <i class="fab fa-github"></i> View on GitHub
                 </a>
-                <a href="#features" class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-lg font-semibold transition backdrop-blur-sm">
-                    Explore Features
+                <a href="#docs" class="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-lg font-semibold transition backdrop-blur-sm">
+                    Read Documentation
                 </a>
             </div>
         </div>
@@ -70,7 +79,6 @@
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
             <div class="feature-card bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                 <div class="text-blue-600 mb-4 text-2xl"><i class="fas fa-microchip"></i></div>
                 <h3 class="text-xl font-bold mb-3">Source Code Understanding</h3>
@@ -78,7 +86,6 @@
                     Deep analysis of parent projects, plugins, and views. Automatically builds screen maps and navigation graphs using JavaParser and Spoon.
                 </p>
             </div>
-            <!-- Feature 2 -->
             <div class="feature-card bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                 <div class="text-blue-600 mb-4 text-2xl"><i class="fas fa-eye"></i></div>
                 <h3 class="text-xl font-bold mb-3">Runtime Inspector</h3>
@@ -86,7 +93,6 @@
                     Attaches a Java Agent to detect active screens, traverse the SWT widget tree, and monitor global variables in real-time.
                 </p>
             </div>
-            <!-- Feature 3 -->
             <div class="feature-card bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                 <div class="text-blue-600 mb-4 text-2xl"><i class="fas fa-robot"></i></div>
                 <h3 class="text-xl font-bold mb-3">Hybrid Automation</h3>
@@ -97,28 +103,61 @@
         </div>
     </section>
 
+    <!-- Documentation Section -->
+    <section id="docs" class="py-20 px-8 bg-slate-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Technical Documentation</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Detailed guides on how the system works and how to get started with the platform.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="USER_GUIDE.md" class="doc-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm block transition">
+                    <div class="text-blue-600 mb-3 text-xl"><i class="fas fa-book-open"></i></div>
+                    <h3 class="font-bold mb-2">User Guide</h3>
+                    <p class="text-slate-500 text-xs">Setup, installation, and using the REST API.</p>
+                </a>
+                <a href="ARCHITECTURE.md" class="doc-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm block transition">
+                    <div class="text-blue-600 mb-3 text-xl"><i class="fas fa-sitemap"></i></div>
+                    <h3 class="font-bold mb-2">Architecture</h3>
+                    <p class="text-slate-500 text-xs">Deep dive into the 5-layer system design.</p>
+                </a>
+                <a href="AI_INTEGRATION.md" class="doc-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm block transition">
+                    <div class="text-blue-600 mb-3 text-xl"><i class="fas fa-brain"></i></div>
+                    <h3 class="font-bold mb-2">AI Integration</h3>
+                    <p class="text-slate-500 text-xs">How LLMs understand code and runtime state.</p>
+                </a>
+                <a href="CONTRIBUTING.md" class="doc-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm block transition">
+                    <div class="text-blue-600 mb-3 text-xl"><i class="fas fa-hands-helping"></i></div>
+                    <h3 class="font-bold mb-2">Contributing</h3>
+                    <p class="text-slate-500 text-xs">Join the project and start contributing.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Architecture Section -->
-    <section id="architecture" class="py-20 px-8 bg-slate-100">
+    <section id="architecture" class="py-20 px-8">
         <div class="max-w-5xl mx-auto">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 <div class="md:w-1/2">
                     <h2 class="text-3xl font-bold text-slate-900 mb-6">Modern AI Architecture</h2>
                     <div class="space-y-4">
-                        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm">
+                        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm border border-slate-100">
                             <div class="text-blue-600 font-bold text-lg">01</div>
                             <div>
                                 <strong class="block font-semibold">Static Analysis</strong>
                                 <span class="text-slate-600 text-sm">Extracts structural maps from Java source code.</span>
                             </div>
                         </div>
-                        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm">
+                        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm border border-slate-100">
                             <div class="text-blue-600 font-bold text-lg">02</div>
                             <div>
                                 <strong class="block font-semibold">Runtime State</strong>
                                 <span class="text-slate-600 text-sm">Dynamic inspection of the live application state.</span>
                             </div>
                         </div>
-                        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm">
+                        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm border border-slate-100">
                             <div class="text-blue-600 font-bold text-lg">03</div>
                             <div>
                                 <strong class="block font-semibold">LLM Reasoning</strong>
@@ -145,32 +184,39 @@
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-20 px-8 max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">Our Journey</h2>
-            <p class="text-slate-600">From foundational analysis to full autonomy.</p>
-        </div>
+    <section id="roadmap" class="py-20 px-8 bg-slate-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Our Journey</h2>
+                <p class="text-slate-600">From foundational analysis to full autonomy.</p>
+                <div class="mt-4">
+                    <a href="ROADMAP.md" class="text-blue-600 font-semibold hover:underline text-sm flex items-center justify-center gap-1">
+                        View Full Detailed Roadmap <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
 
-        <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:w-0.5 before:bg-slate-200">
-            <div class="relative pl-12">
-                <div class="absolute left-0 top-1 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold z-10">1</div>
-                <h3 class="text-xl font-bold mb-2">Phase 1: Foundations (MVP)</h3>
-                <p class="text-slate-600 text-sm">Static analyzers, Runtime inspection, and REST API layer. <span class="text-green-600 font-semibold">✓ Completed</span></p>
-            </div>
-            <div class="relative pl-12">
-                <div class="absolute left-0 top-1 w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-white font-bold z-10">2</div>
-                <h3 class="text-xl font-bold mb-2">Phase 2: AI Navigation</h3>
-                <p class="text-slate-600 text-sm">Integration with LangChain4j and self-healing locators.</p>
-            </div>
-            <div class="relative pl-12">
-                <div class="absolute left-0 top-1 w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-white font-bold z-10">3</div>
-                <h3 class="text-xl font-bold mb-2">Phase 3: Agentic Testing</h3>
-                <p class="text-slate-600 text-sm">Multi-agent system (Planner, Validator, Repair) and OpenAPI generation.</p>
-            </div>
-            <div class="relative pl-12">
-                <div class="absolute left-0 top-1 w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-white font-bold z-10">4</div>
-                <h3 class="text-xl font-bold mb-2">Phase 4: Full Autonomy</h3>
-                <p class="text-slate-600 text-sm">Autonomous test generation and enterprise-grade reporting.</p>
+            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:w-0.5 before:bg-slate-200">
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-1 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold z-10">1</div>
+                    <h3 class="text-xl font-bold mb-2">Phase 1: Foundations (MVP)</h3>
+                    <p class="text-slate-600 text-sm">Static analyzers, Runtime inspection, and REST API layer. <span class="text-green-600 font-semibold">✓ Completed</span></p>
+                </div>
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-1 w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-white font-bold z-10">2</div>
+                    <h3 class="text-xl font-bold mb-2">Phase 2: AI Navigation</h3>
+                    <p class="text-slate-600 text-sm">Integration with LangChain4j and self-healing locators.</p>
+                </div>
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-1 w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-white font-bold z-10">3</div>
+                    <h3 class="text-xl font-bold mb-2">Phase 3: Agentic Testing</h3>
+                    <p class="text-slate-600 text-sm">Multi-agent system (Planner, Validator, Repair) and OpenAPI generation.</p>
+                </div>
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-1 w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-white font-bold z-10">4</div>
+                    <h3 class="text-xl font-bold mb-2">Phase 4: Full Autonomy</h3>
+                    <p class="text-slate-600 text-sm">Autonomous test generation and enterprise-grade reporting.</p>
+                </div>
             </div>
         </div>
     </section>
