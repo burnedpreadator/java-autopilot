@@ -3,35 +3,86 @@ package com.jatp.analyzer.staticanalysis;
 import com.jatp.core.model.Screen;
 import com.jatp.core.model.Widget;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.expr.ObjectCreationExpr;
-import com.github.javaparser.ast.stmt.BlockStmt;
 
 /**
  * Engine for performing static analysis on Java source code to discover application structure.
  */
 public class StaticAnalysisEngine {
 
+    private static final Set<String> UI_SUPERCLASSES = Set.of(
+        "Composite", "Shell", "Dialog", "TrayDialog", "TitleAreaDialog",
+        "JFrame", "JPanel", "JDialog", "JInternalFrame",
+        "ViewPart", "EditorPart", "MultiPageEditorPart", "FormPage"
+    );
+
     /**
-     * Analyzes a source directory and returns a map of discovered screens.
+     * Analyzes a source directory by recursively walking it to find all Java files,
+     * parsing each one, and discovering screen/view classes and their widgets.
+     *
      * @param sourcePath The path to the Java source code.
      * @return A map of screenId to Screen objects.
      */
     public Map<String, Screen> analyzeSource(Path sourcePath) throws IOException {
-        // This is a simplified implementation for the MVP.
-        // In a real scenario, it would recursively walk the directory.
         Map<String, Screen> discoveredScreens = new HashMap<>();
 
-        // For the MVP, we'll implement basic discovery of classes that might be screens.
-        // This will be expanded in the Eclipse-specific analyzer.
+        try (Stream<Path> files = Files.walk(sourcePath)) {
+            List<Path> javaFiles = files
+                .filter(Files::isRegularFile)
+                .filter(p -> p.toString().endsWith(".java"))
+                .collect(Collectors.toList());
+
+            for (Path javaFile : javaFiles) {
+                try {
+                    CompilationUnit cu = StaticJavaParser.parse(javaFile);
+                    List<ClassOrInterfaceDeclaration> screenClasses =
+                        cu.findAll(ClassOrInterfaceDeclaration.class).stream()
+                           .filter(c -> isScreenCandidate(c))
+                           .collect(Collectors.toList());
+
+                    for (ClassOrInterfaceDeclaration cls : screenClasses) {
+                        String screenId = cls.getFullyQualifiedName()
+                            .orElse(cls.getNameAsString());
+                        String viewClass = screenId;
+                        List<Widget> widgets = extractWidgetsFromClass(cls);
+
+                        discoveredScreens.put(screenId,
+                            new Screen(screenId, viewClass, List.of(), widgets, List.of()));
+                    }
+                } catch (Exception e) {
+                    System.err.println("[StaticAnalysis] Failed to parse: "
+                        + javaFile + " - " + e.getMessage());
+                }
+            }
+        }
+
         return discoveredScreens;
+    }
+
+    /**
+     * Determines if a class declaration is likely a UI screen/view.
+     */
+    private boolean isScreenCandidate(ClassOrInterfaceDeclaration cls) {
+        if (cls.isInterface() || cls.isAbstract()) {
+            return false;
+        }
+        if (cls.getExtendedTypes().stream()
+               .anyMatch(t -> UI_SUPERCLASSES.contains(t.getNameAsString()))) {
+            return true;
+        }
+        String name = cls.getNameAsString();
+        return name.endsWith("View") || name.endsWith("Screen")
+            || name.endsWith("Dialog") || name.endsWith("Panel")
+            || name.endsWith("Editor") || name.endsWith("Page");
     }
 
     /**
