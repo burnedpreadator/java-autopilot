@@ -87,3 +87,126 @@ inspector.dumpWidgetTree().thenAccept(widgets -> {
     widgets.forEach(w -> System.out.println(w.label()));
 });
 ```
+
+---
+
+## 5. Example Eclipse RCP Project Paths
+
+When configuring `jatp.analyzer.source-path`, the value should point to the root directory of your Eclipse RCP project.
+
+### Windows Examples
+
+```text
+C:\workspace\my-rcp-app
+C:\projects\eclipse-rcp-demo
+D:\development\customer-portal
+```
+
+### Linux Examples
+
+```text
+/home/user/workspace/my-rcp-app
+/home/user/projects/eclipse-rcp-demo
+```
+
+### macOS Examples
+
+```text
+/Users/user/workspace/my-rcp-app
+/Users/user/projects/eclipse-rcp-demo
+```
+
+Example configuration:
+
+```yaml
+jatp:
+  analyzer:
+    source-path: C:\workspace\my-rcp-app
+```
+
+---
+
+## 6. Sample Test Cases
+
+The following examples demonstrate how JavaAutoPilot can be used to automate common Eclipse RCP workflows.
+
+### Test Case 1: Login Screen Validation
+
+**Objective**
+
+Verify that a user can successfully log in.
+
+**Steps**
+
+1. Launch the application.
+2. Locate the `usernameField` widget.
+3. Enter `admin`.
+4. Locate the `passwordField` widget.
+5. Enter `password123`.
+6. Click the `loginButton`.
+
+**Expected Result**
+
+The application navigates to the main dashboard screen.
+
+---
+
+### Test Case 2: Save Customer Form
+
+**Objective**
+
+Verify that customer information can be saved successfully.
+
+**Steps**
+
+1. Open the Customer Management screen.
+2. Enter a customer name.
+3. Enter a customer email address.
+4. Click the `saveButton`.
+
+**Expected Result**
+
+A success message is displayed and the customer record is saved.
+
+---
+
+### Test Case 3: Screen Discovery
+
+**Objective**
+
+Verify that the runtime inspector can detect the active screen.
+
+**Steps**
+
+1. Launch the application.
+2. Navigate to a known screen.
+3. Call:
+
+```http
+GET /api/inspector/current-screen
+```
+
+**Expected Result**
+
+The API returns the correct active screen identifier.
+
+---
+
+### Test Case 4: Widget Inspection
+
+**Objective**
+
+Verify that widgets can be discovered through runtime inspection.
+
+**Steps**
+
+1. Launch the application.
+2. Call:
+
+```http
+GET /api/inspector/widgets
+```
+
+**Expected Result**
+
+The API returns a list of available widgets with identifiers and metadata.
