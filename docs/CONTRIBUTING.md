@@ -30,6 +30,20 @@ Check the [GitHub Issues](https://github.com/burnedpreadator/java-autopilot/issu
    - Describe the changes you've made.
    - Link to the issue you are resolving.
 
+## Running the jatp-Core Tests
+
+Run `./gradlew :jatp-core:check` (`.\gradlew.bat :jatp-core:check` on Windows)
+to execute the core tests and enforce 100% line and branch coverage for each
+class in `com.jatp.core.model`.
+
+The HTML coverage report is generated at
+`jatp-core/build/reports/jacoco/test/html/index.html`; the JUnit test report is at
+`jatp-core/build/reports/tests/test/index.html`.
+
+The core tests cover analysis-result records, including incomplete metadata and
+empty screens. They do not execute Spoon: the current analyzer uses JavaParser,
+and Spoon-based navigation analysis is still a backlog item.
+
 ## Coding Standards
 - **Language**: Java 21 (Targeting Java 17 for compatibility).
 - **Build System**: Gradle (Kotlin DSL).
